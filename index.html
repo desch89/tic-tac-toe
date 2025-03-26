@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <h1>Tic Tac Toe</h1>
+    <div id="current-player" class="current-player"></div>
+
+    <div class="board-container">
+      <div id="board" class="board"></div>
+
+      <!-- Kreide-Linien darüber positioniert -->
+      <div class="chalk-line v1"></div>
+      <div class="chalk-line v2"></div>
+      <div class="chalk-line h1"></div>
+      <div class="chalk-line h2"></div>
+    </div>
+    <div id="winner-text" class="winner-text"></div>
+
+    <!-- Restart-Button (optional) -->
+    <button class="chalk-button" onclick="restartGame()">Neu starten</button>
+
     <script src="scripts.js"></script>
-    <title>Tic Tac Toe
-    </title>
-</head>
-<body>
-    
-</body>
+  </body>
 </html>

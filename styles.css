@@ -1,0 +1,270 @@
+body {
+  background-color: #000;
+  font-family: 'Schoolbell', cursive;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 30px;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px white;
+}
+
+.board-container {
+  position: relative;
+  width: 306px;
+  margin: 40px auto;
+}
+
+.current-player {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 16px;
+  color: white;
+  font-family: 'Schoolbell', cursive;
+  text-shadow: 0 0 3px rgba(255,255,255,0.7);
+  min-height: 30px;
+  transition: all 0.2s ease;
+}
+
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  color: white;
+  cursor: pointer;
+  background: transparent;
+  filter: blur(0.3px);
+  text-shadow: 0 0 2px white;
+  overflow: hidden;
+}
+
+.cell svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Linien separat obendrüber gelegt */
+.chalk-line {
+  position: absolute;
+  background: white;
+  filter: blur(1.5px) brightness(1.1);
+  border-radius: 10px;
+  opacity: 0.85;
+  z-index: 2;
+}
+
+/* Vertikale Linien */
+.chalk-line.v1 {
+  top: 0;
+  left: 100px;
+  width: 6px;
+  height: 306px;
+  transform: rotate(1deg);
+}
+
+.chalk-line.v2 {
+  top: 0;
+  left: 203px;
+  width: 5px;
+  height: 306px;
+  transform: rotate(-2deg);
+}
+
+/* Horizontale Linien */
+.chalk-line.h1 {
+  top: 100px;
+  left: 0;
+  height: 6px;
+  width: 306px;
+  transform: rotate(-1deg);
+}
+
+.chalk-line.h2 {
+  top: 203px;
+  left: 0;
+  height: 5px;
+  width: 306px;
+  transform: rotate(2deg);
+}
+
+.winning-line {
+  position: absolute;
+  background-color: red;
+  height: 6px;
+  width: 0;
+  top: 50%;
+  left: 0;
+  transform-origin: left center;
+  z-index: 10;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.7)) blur(1px);
+  animation: drawWinnerLine 0.6s ease-out forwards,
+             chalkDust 0.6s ease-out forwards;
+}
+
+
+@keyframes drawWinnerLine {
+  to {
+    width: var(--line-length);
+  }
+}
+
+@keyframes chalkDust {
+  0% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 10px red) blur(3px);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px red) blur(2px);
+  }
+  100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 6px red) blur(1px);
+  }
+}
+
+.winner-text {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+  color: white;
+  font-family: 'Schoolbell', cursive;
+  text-shadow: 1px 1px 3px #000;
+  min-height: 30px;
+}
+
+
+.symbol {
+  width: 100%;
+  height: 100%;
+  stroke: white;
+  stroke-width: 10;
+  fill: none;
+}
+
+.symbol.x line,
+.symbol.o circle {
+  stroke-linecap: round;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+.chalk-button {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px dashed white;
+  color: white;
+  font-family: 'Schoolbell', cursive;
+  font-size: 22px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-shadow: 0 0 3px white;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  overflow: hidden;
+}
+
+.chalk-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+.chalk-button:active {
+  transform: scale(0.97);
+  animation: puff 0.4s ease-out;
+}
+
+@keyframes puff {
+  0% {
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.5);
+    filter: blur(0);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 20px 6px rgba(255,255,255,0.8);
+    filter: blur(2px);
+    opacity: 0.8;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255,255,255,0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.chalk-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, white 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.chalk-button:active::after {
+  animation: chalk-cloud 0.4s ease-out;
+}
+
+@keyframes chalk-cloud {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}
